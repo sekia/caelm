@@ -1,10 +1,10 @@
 open Html_types
-open Reactjs_tyxml_base_intf
-open Reactjs_wrapper
+open Caelm_reactjs_tyxml_base_intf
+open Caelm_reactjs_wrapper
 
-module Make (Reactjs : Reactjs.S) : sig
+module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
   module Base : sig
-    module Properties : Reactjs_wrapper.S.Properties
+    module Properties : Caelm_reactjs_wrapper.S.Properties
 
     module Xml : sig
       type attrib = string * Properties.Value.t
@@ -25,7 +25,7 @@ module Make (Reactjs : Reactjs.S) : sig
                and type event_handler := event_handler
                and type uri = Uri.t
 
-      val to_react_element : elt -> Reactjs.element Js.t option
+      val to_react_element : elt -> Caelm_reactjs.element Js.t option
     end
 
     module Svg : Svg_sigs.Make(Xml).T
@@ -46,7 +46,8 @@ module Make (Reactjs : Reactjs.S) : sig
     val a_onanimationend :
       (element animation_event Js.t -> unit) -> [> `OnAnimationEnd ] attrib
     val a_onanimationiteration :
-      (element animation_event Js.t -> unit) -> [> `OnAnimationIteration ] attrib
+      (element animation_event Js.t -> unit) ->
+      [> `OnAnimationIteration ] attrib
     val a_onanimationstart :
       (element animation_event Js.t -> unit) -> [> `OnAnimationStart ] attrib
 
@@ -62,9 +63,11 @@ module Make (Reactjs : Reactjs.S) : sig
     val a_oncompositionend :
       (element composition_event Js.t -> unit) -> [> `OnCompositionEnd ] attrib
     val a_oncompositionstart :
-      (element composition_event Js.t -> unit) -> [> `OnCompositionStart ] attrib
+      (element composition_event Js.t -> unit) ->
+      [> `OnCompositionStart ] attrib
     val a_oncompositionupdate :
-      (element composition_event Js.t -> unit) -> [> `OnCompositionUpdate ] attrib
+      (element composition_event Js.t -> unit) ->
+      [> `OnCompositionUpdate ] attrib
 
     (* Focus events *)
     val a_onblur : (element focus_event Js.t -> unit) -> [> `OnBlur ] attrib
@@ -587,6 +590,6 @@ module Make (Reactjs : Reactjs.S) : sig
 
     val text : string -> [> `PCDATA ] elt
 
-    val to_react_element : 'a elt -> Reactjs.element Js.t
+    val to_react_element : 'a elt -> Caelm_reactjs.element Js.t
   end
 end

@@ -1,4 +1,4 @@
-include Reactjs_intf
+include Caelm_reactjs_intf
 
 module Make (Scope : Scope) = struct
   type element

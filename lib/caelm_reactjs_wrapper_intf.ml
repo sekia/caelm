@@ -32,18 +32,18 @@ module S = struct
   end
 
   module type Wrapper = sig
-    module Reactjs : Reactjs.S
+    module Caelm_reactjs : Caelm_reactjs.S
     module Properties : Properties
 
-    type node = [ `String of string | `Element of Reactjs.element Js.t ]
+    type node = [ `String of string | `Element of Caelm_reactjs.element Js.t ]
 
     type element_type = [ `Tag of string ]
 
     val create_element : element_type -> Properties.t -> node list ->
-                         Reactjs.element Js.t
+                         Caelm_reactjs.element Js.t
 
     val render : ?callback:(unit -> unit) -> Dom_html.element Js.t ->
-                 Reactjs.element Js.t -> Dom_html.element Js.t
+                 Caelm_reactjs.element Js.t -> Dom_html.element Js.t
   end
 end
 

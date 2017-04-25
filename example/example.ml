@@ -52,7 +52,7 @@ module State = struct
   let time { time; _ } = time
 end
 
-module Reactjs = Reactjs.Make
+module Reactjs = Caelm_reactjs.Make
   (struct
     let scope = Js.Unsafe.global
     let var_name = function
@@ -61,8 +61,8 @@ module Reactjs = Reactjs.Make
   end)
 
 module View = struct
-  module Tyxml = Reactjs_tyxml.Make (Reactjs)
-  module Wrapper = Reactjs_wrapper.Make (Reactjs)
+  module Tyxml = Caelm_reactjs_tyxml.Make (Reactjs)
+  module Wrapper = Caelm_reactjs_wrapper.Make (Reactjs)
   let render send container =
     fun state ->
     let open State in  (* For message constructors. *)
@@ -102,7 +102,7 @@ end
 let () =
   let root =
     Dom_html.document##(getElementById (Js.string "react-app"))
-    |> Reactjs_wrapper.Unsafe.opt_get_exn in
+    |> Caelm_reactjs_wrapper.Unsafe.opt_get_exn in
   let app = App.create (State.create ()) in
   let subscriptions = [ (module Tick : App.Subscription) ] in
   let terminate = App.run app ~subscriptions root in

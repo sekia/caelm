@@ -1,9 +1,9 @@
-open Reactjs_tyxml_base_intf
+open Caelm_reactjs_tyxml_base_intf
 
-module Make (Reactjs : Reactjs.S) = struct
+module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
   module Base = struct
-    module Wrapper = Reactjs_wrapper.Make (Reactjs)
-    module Properties = Reactjs_wrapper.Properties
+    module Wrapper = Caelm_reactjs_wrapper.Make (Caelm_reactjs)
+    module Properties = Caelm_reactjs_wrapper.Properties
 
     module Xml = struct
       module W = Xml_wrap.NoWrap
