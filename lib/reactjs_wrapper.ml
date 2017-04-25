@@ -3,17 +3,23 @@ include Reactjs_wrapper_intf
 module Properties = struct
   module Value = struct
     type event_handler = element event Js.t -> unit
+    type inner_html
 
     type t =
       [ `Bool of bool
       | `EventHandler of event_handler
       | `Float of float
       | `Int of int
+      | `InnerHtml of inner_html
       | `String of string
       ]
 
     module Unsafe = struct
       let cast_event_handler f event = f (Js.Unsafe.coerce event)
+
+      let inner_html fragment =
+        let open Js.Unsafe in
+        obj [| "__html", inject (Js.string fragment) |]
     end
 
     let to_any =
@@ -23,6 +29,7 @@ module Properties = struct
       | `EventHandler h -> Some (inject (Js.wrap_callback h))
       | `Float f -> Some (inject f)
       | `Int i -> Some (inject i)
+      | `InnerHtml h -> Some (inject h)
       | `String s -> Some (inject (Js.string s))
   end
 

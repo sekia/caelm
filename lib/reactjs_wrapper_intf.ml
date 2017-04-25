@@ -2,17 +2,20 @@ module S = struct
   module type Properties = sig
     module Value : sig
       type event_handler
+      type inner_html
 
       type t =
         [ `Bool of bool
         | `EventHandler of event_handler
         | `Float of float
+        | `InnerHtml of inner_html
         | `Int of int
         | `String of string
         ]
 
       module Unsafe : sig
         val cast_event_handler : ('a Js.t -> unit) -> event_handler
+        val inner_html : string -> inner_html
       end
     end
 

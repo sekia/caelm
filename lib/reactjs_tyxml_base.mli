@@ -36,6 +36,10 @@ module Make (Reactjs : Reactjs.S) : sig
   module Html : sig
     include module type of Base.Html
 
+    val a_key : string -> [> `Key ] attrib
+    val a_dangerouslysetinnerhtml :
+      string -> [> `DangerouslySetInnerHTML ] attrib
+
     (* ReactJS's synthetic event handlers *)
 
     (* Animation events *)
@@ -195,340 +199,391 @@ module Make (Reactjs : Reactjs.S) : sig
       (element wheel_event Js.t -> unit) -> [> `OnWheel ] attrib
 
     val html :
-      ?a:[< html_attrib | event_attrib ] attrib list -> [< `Head ] elt ->
-      [< `Body ] elt -> [> `Html ] elt
+      ?a:[< html_attrib | event_attrib | `DangerouslySetInnerHTML | `Key
+         ] attrib list -> [< `Head ] elt -> [< `Body ] elt -> [> `Html ] elt
 
     val head :
-      ?a:[< head_attrib | event_attrib ] attrib list -> [< `Title ] elt ->
-      head_content_fun elt list -> [> head ] elt
+      ?a:[< head_attrib | event_attrib | `DangerouslySetInnerHTML | `Key
+         ] attrib list ->
+      [< `Title ] elt -> head_content_fun elt list -> [> head ] elt
 
     val body :
-      ([< body_attrib | event_attrib ], [< body_content_fun ], [> body ]) star
+      ([< body_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< body_content_fun ], [> body ]) star
 
     val footer :
-      ([< common | event_attrib ], [< flow5_without_header_footer ],
-       [> `Footer ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< flow5_without_header_footer ], [> `Footer ]) star
 
     val header :
-      ([< common | event_attrib ], [< flow5_without_header_footer ],
-       [> `Header ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< flow5_without_header_footer ], [> `Header ]) star
 
     val section :
-      ([< section_attrib | event_attrib ], [< section_content_fun ],
-       [> section ]) star
+      ([< section_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< section_content_fun ], [> section ]) star
 
     val nav :
-      ([< nav_attrib | event_attrib ], [< nav_content_fun ], [> nav ]) star
+      ([< nav_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< nav_content_fun ], [> nav ]) star
 
     val h1 :
-      ([< h1_attrib | event_attrib ], [< h1_content_fun ], [> h1 ]) star
+      ([< h1_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h1_content_fun ], [> h1 ]) star
 
     val h2 :
-      ([< h2_attrib | event_attrib ], [< h2_content_fun ], [> h2 ]) star
+      ([< h2_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h2_content_fun ], [> h2 ]) star
 
     val h3 :
-      ([< h3_attrib | event_attrib ], [< h3_content_fun ], [> h3 ]) star
+      ([< h3_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h3_content_fun ], [> h3 ]) star
 
     val h4 :
-      ([< h4_attrib | event_attrib ], [< h4_content_fun ], [> h4 ]) star
+      ([< h4_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h4_content_fun ], [> h4 ]) star
 
     val h5 :
-      ([< h5_attrib | event_attrib ], [< h5_content_fun ], [> h5 ]) star
+      ([< h5_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h5_content_fun ], [> h5 ]) star
 
     val h6 :
-      ([< h6_attrib | event_attrib ], [< h6_content_fun ], [> h6 ]) star
+      ([< h6_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< h6_content_fun ], [> h6 ]) star
 
     val hgroup :
-      ([< hgroup_attrib | event_attrib ], [< hgroup_content_fun ],
-       [> hgroup ]) star
+      ([< hgroup_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< hgroup_content_fun ], [> hgroup ]) star
 
     val address :
-      ([< address_attrib | event_attrib ], [< address_content_fun ],
-       [> address ]) star
+      ([< address_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< address_content_fun ], [> address ]) star
 
     val article :
-      ([< article_attrib | event_attrib ], [< article_content_fun ],
-       [> article ]) star
+      ([< article_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< article_content_fun ], [> article ]) star
 
     val aside :
-      ([< aside_attrib | event_attrib ], [< aside_content_fun ],
-       [> aside ]) star
+      ([< aside_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< aside_content_fun ], [> aside ]) star
 
     val main :
-      ([< main_attrib | event_attrib ], [< main_content_fun ], [> main ]) star
+      ([< main_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< main_content_fun ], [> main ]) star
 
     val p :
-      ([< p_attrib | event_attrib ], [< p_content_fun ], [> p ]) star
+      ([< p_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< p_content_fun ], [> p ]) star
 
     val pre :
-      ([< pre_attrib | event_attrib ], [< pre_content_fun ], [> pre ]) star
+      ([< pre_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< pre_content_fun ], [> pre ]) star
 
     val blockquote :
-      ([< blockquote_attrib | event_attrib ], [< blockquote_content_fun ],
-       [> blockquote ]) star
+      ([< blockquote_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< blockquote_content_fun ], [> blockquote ]) star
 
     val div :
-      ([< div_attrib | event_attrib ], [< div_content_fun ], [> div ]) star
+      ([< div_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< div_content_fun ], [> div ]) star
 
     val dl :
-      ([< dl_attrib | event_attrib ], [< dl_content_fun ], [> dl ]) star
+      ([< dl_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< dl_content_fun ], [> dl ]) star
 
     val ol :
-      ([< ol_attrib | event_attrib ], [< ol_content_fun ], [> ol ]) star
+      ([< ol_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< ol_content_fun ], [> ol ]) star
 
     val ul :
-      ([< ul_attrib | event_attrib ], [< ul_content_fun ], [> ul ]) star
+      ([< ul_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< ul_content_fun ], [> ul ]) star
 
     val dd :
-      ([< dd_attrib | event_attrib ], [< dd_content_fun ], [> dd ]) star
+      ([< dd_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< dd_content_fun ], [> dd ]) star
 
     val dt :
-      ([< dt_attrib | event_attrib ], [< dt_content_fun ], [> dt ]) star
+      ([< dt_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< dt_content_fun ], [> dt ]) star
 
     val li :
-      ([< li_attrib | event_attrib ], [< li_content_fun ], [> li ]) star
+      ([< li_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< li_content_fun ], [> li ]) star
 
     val figcaption :
-      ([< figcaption_attrib | event_attrib ], [< figcaption_content_fun ],
-       [> figcaption ]) star
+      ([< figcaption_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< figcaption_content_fun ], [> figcaption ]) star
 
     val figure :
       ?figcaption:[ `Top of [< `Figcaption ] elt
                   | `Bottom of [< `Figcaption ] elt ] ->
-      ([< figure_attrib | event_attrib ], [< figure_content_fun ],
-       [> figure ]) star
+      ([< figure_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< figure_content_fun ], [> figure ]) star
 
     val hr :
-      ([< hr_attrib | event_attrib ], [> hr ]) nullary
+      ([< hr_attrib | event_attrib | `Key ], [> hr ]) nullary
 
     val b :
-      ([< b_attrib | event_attrib ], [< b_content_fun ], [> b ]) star
+      ([< b_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< b_content_fun ], [> b ]) star
 
     val i :
-      ([< i_attrib | event_attrib ], [< i_content_fun ], [> i ]) star
+      ([< i_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< i_content_fun ], [> i ]) star
 
     val u :
-      ([< u_attrib | event_attrib ], [< u_content_fun ], [> u ]) star
+      ([< u_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< u_content_fun ], [> u ]) star
 
     val small :
-      ([< small_attrib | event_attrib ], [< small_content_fun ],
-       [> small ]) star
+      ([< small_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< small_content_fun ], [> small ]) star
 
     val sub :
-      ([< sub_attrib | event_attrib ], [< sub_content_fun ], [> sub ]) star
+      ([< sub_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< sub_content_fun ], [> sub ]) star
 
     val sup :
-      ([< sup_attrib | event_attrib ], [< sup_content_fun ], [> sup ]) star
+      ([< sup_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< sup_content_fun ], [> sup ]) star
 
     val mark :
-      ([< mark_attrib | event_attrib ], [< mark_content_fun ], [> mark ]) star
+      ([< mark_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< mark_content_fun ], [> mark ]) star
 
     val wbr :
-      ([< wbr_attrib | event_attrib ], [> wbr ]) nullary
+      ([< wbr_attrib | event_attrib | `Key ], [> wbr ]) nullary
 
     val bdo :
       dir:[< `Ltr | `Rtl ] ->
-      ([< common | event_attrib ], [< phrasing ], [> `Bdo ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< phrasing ], [> `Bdo ]) star
 
     val abbr :
-      ([< abbr_attrib | event_attrib ], [< abbr_content_fun ], [> abbr ]) star
+      ([< abbr_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< abbr_content_fun ], [> abbr ]) star
 
     val br :
-      ([< br_attrib | event_attrib ], [> br ]) nullary
+      ([< br_attrib | event_attrib | `Key ], [> br ]) nullary
 
     val cite :
-      ([< cite_attrib | event_attrib ], [< cite_content_fun ], [> cite ]) star
+      ([< cite_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< cite_content_fun ], [> cite ]) star
 
     val code :
-      ([< code_attrib | event_attrib ], [< code_content_fun ], [> code ]) star
+      ([< code_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< code_content_fun ], [> code ]) star
 
     val dfn :
-      ([< dfn_attrib | event_attrib ], [< dfn_content_fun ], [> dfn ]) star
+      ([< dfn_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< dfn_content_fun ], [> dfn ]) star
 
     val em :
-      ([< em_attrib | event_attrib ], [< em_content_fun ], [> em ]) star
+      ([< em_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< em_content_fun ], [> em ]) star
 
     val kbd :
-      ([< kbd_attrib | event_attrib ], [< kbd_content_fun ], [> kbd ]) star
+      ([< kbd_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< kbd_content_fun ], [> kbd ]) star
 
     val q :
-      ([< q_attrib | event_attrib ], [< q_content_fun ], [> q ]) star
+      ([< q_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< q_content_fun ], [> q ]) star
 
     val samp :
-      ([< samp_attrib | event_attrib ], [< samp_content_fun ], [> samp ]) star
+      ([< samp_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< samp_content_fun ], [> samp ]) star
 
     val span :
-      ([< span_attrib | event_attrib ], [< span_content_fun ], [> span ]) star
+      ([< span_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< span_content_fun ], [> span ]) star
 
     val strong :
-      ([< strong_attrib | event_attrib ], [< strong_content_fun ],
-       [> strong ]) star
+      ([< strong_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< strong_content_fun ], [> strong ]) star
 
     val time :
-      ([< time_attrib | event_attrib ], [< time_content_fun ], [> time ]) star
+      ([< time_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< time_content_fun ], [> time ]) star
 
     val var :
-      ([< var_attrib | event_attrib ], [< var_content_fun ], [> var ]) star
+      ([< var_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< var_content_fun ], [> var ]) star
 
     val a :
-      ([< a_attrib | event_attrib ], 'a, [> `A of 'a ]) star
+      ([< a_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> `A of 'a ]) star
 
     val del :
-      ([< del_attrib | event_attrib ], 'a, [> `Del of 'a ]) star
+      ([< del_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> `Del of 'a ]) star
 
     val ins :
-      ([< ins_attrib | event_attrib ], 'a, [> `Ins of 'a ]) star
+      ([< ins_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> `Ins of 'a ]) star
 
     val img :
       src:Xml.uri ->
       alt:text ->
-      ([< img_attrib | event_attrib ], [> img ]) nullary
+      ([< img_attrib | event_attrib | `Key ], [> img ]) nullary
 
     val iframe :
-      ([< common | event_attrib | `Src | `Name | `Sandbox | `Seamless | `Width
-        | `Height ], [< `PCDATA ], [> `Iframe ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Src | `Name
+        | `Sandbox | `Seamless | `Width | `Height ], [< `PCDATA ], [> `Iframe ]
+      ) star
 
     val object_ :
       ?params:[< `Param ] elt list ->
-      ([< common | event_attrib | `Data | `Form | `Mime_type | `Height | `Width
-        | `Name | `Usemap ], 'a, [> `Object of 'a ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Data
+        | `Form | `Mime_type | `Height | `Width | `Name | `Usemap ], 'a,
+       [> `Object of 'a ]) star
 
     val param :
-      ([< param_attrib | event_attrib ], [> param ]) nullary
+      ([< param_attrib | event_attrib | `Key ], [> param ]) nullary
 
     val embed :
-      ([< common | event_attrib | `Src | `Height | `Mime_type | `Width ],
+      ([< common | event_attrib | `Key | `Src | `Height | `Mime_type | `Width ],
        [> `Embed ]) nullary
 
     val audio :
       ?src:Xml.uri ->
       ?srcs:[< source ] elt list ->
-      ([< audio_attrib | event_attrib ], 'a, [> 'a audio ]) star
+      ([< audio_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> 'a audio ]) star
 
     val video :
       ?src:Xml.uri ->
       ?srcs:[< source ] elt list ->
-      ([< video_attrib | event_attrib ], 'a, [> 'a video ]) star
+      ([< video_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> 'a video ]) star
 
     val canvas :
-      ([< canvas_attrib | event_attrib ], 'a, [> 'a canvas ]) star
+      ([< canvas_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> 'a canvas ]) star
 
     val source :
-      ([< source_attrib | event_attrib ], [> source ]) nullary
+      ([< source_attrib | event_attrib | `Key ], [> source ]) nullary
 
     val area :
       alt:text ->
-      ([< common | event_attrib | `Alt | `Coords | `Shape | `Target | `Rel
-       | `Media | `Hreflang | `Mime_type], [> `Area ]) nullary
+      ([< common | event_attrib | `Key | `Alt | `Coords | `Shape | `Target
+        | `Rel | `Media | `Hreflang | `Mime_type], [> `Area ]) nullary
 
     val map :
-      ([< map_attrib | event_attrib ], 'a, [> `A of 'a ]) star
+      ([< map_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
+       [> `A of 'a ]) star
 
     val caption :
-      ([< caption_attrib | event_attrib ], [< caption_content_fun ],
-       [> caption ]) star
+      ([< caption_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< caption_content_fun ], [> caption ]) star
 
     val table :
       ?caption:[< caption ] elt ->
       ?columns:[< colgroup ] elt list ->
       ?thead:[< thead ] elt ->
       ?tfoot:[< tfoot ] elt ->
-      ([< table_attrib | event_attrib ], [< table_content_fun ],
-       [> table ]) star
+      ([< table_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< table_content_fun ], [> table ]) star
 
     val tablex :
       ?caption:[< caption ] elt ->
       ?columns:[< colgroup ] elt list ->
       ?thead:[< thead ] elt ->
       ?tfoot:[< tfoot ] elt ->
-      ([< tablex_attrib | event_attrib ], [< tablex_content_fun ],
-       [> tablex ]) star
+      ([< tablex_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< tablex_content_fun ], [> tablex ]) star
 
     val colgroup :
-      ([< colgroup_attrib | event_attrib ], [< colgroup_content_fun ],
-       [> colgroup ]) star
+      ([< colgroup_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< colgroup_content_fun ], [> colgroup ]) star
 
-    val col : ([< col_attrib | event_attrib ], [> col ]) nullary
+    val col : ([< col_attrib | event_attrib | `Key ], [> col ]) nullary
 
     val thead :
-      ([< thead_attrib | event_attrib ], [< thead_content_fun ],
-       [> thead ]) star
+      ([< thead_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< thead_content_fun ], [> thead ]) star
 
     val tbody :
-      ([< tbody_attrib | event_attrib ], [< tbody_content_fun ],
-       [> tbody ]) star
+      ([< tbody_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< tbody_content_fun ], [> tbody ]) star
 
     val tfoot :
-      ([< tfoot_attrib | event_attrib ], [< tfoot_content_fun ],
-       [> tfoot ]) star
+      ([< tfoot_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< tfoot_content_fun ], [> tfoot ]) star
 
     val td :
-      ([< td_attrib | event_attrib ], [< td_content_fun ], [> td ]) star
+      ([< td_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< td_content_fun ], [> td ]) star
 
     val th :
-      ([< th_attrib | event_attrib ], [< th_content_fun ], [> th ]) star
+      ([< th_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< th_content_fun ], [> th ]) star
 
     val tr :
-      ([< tr_attrib | event_attrib ], [< tr_content_fun ], [> tr ]) star
+      ([< tr_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< tr_content_fun ], [> tr ]) star
 
     val form :
-      ([< form_attrib | event_attrib ], [< form_content_fun ], [> form ]) star
+      ([< form_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< form_content_fun ], [> form ]) star
 
     val fieldset :
       ?legend:[< `Legend ] elt ->
-      ([< common | event_attrib | `Disabled | `Form | `Name ], [< flow5 ],
-       [> `Fieldset ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Disabled
+        | `Form | `Name ], [< flow5 ], [> `Fieldset ]) star
 
     val legend :
-      ([< legend_attrib | event_attrib ], [< legend_content_fun ],
-       [> legend ]) star
+      ([< legend_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< legend_content_fun ], [> legend ]) star
 
     val label :
-      ([< label_attrib | event_attrib ], [< label_content_fun ],
-       [> label ]) star
+      ([< label_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< label_content_fun ], [> label ]) star
 
     val input :
-      ([< input_attrib | event_attrib ], [> input ]) nullary
+      ([< input_attrib | event_attrib | `Key ], [> input ]) nullary
 
     val button :
-      ([< button_attrib | event_attrib ], [< button_content_fun ],
-       [> button ]) star
+      ([< button_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< button_content_fun ], [> button ]) star
 
     val select :
-      ([< select_attrib | event_attrib | `Value ], [< select_content_fun ],
-       [> select ]) star
+      ([< select_attrib | event_attrib | `DangerouslySetInnerHTML | `Key
+        | `Value ], [< select_content_fun ], [> select ]) star
 
     val datalist :
       ?children:[< `Options of [< `Option ] elt list
                  | `Phras of [< phrasing ] elt list ] ->
-      ([< common | event_attrib ], [> `Datalist ]) nullary
+      ([< common | event_attrib | `Key ], [> `Datalist ]) nullary
 
     val optgroup :
       label:text ->
-      ([< common | event_attrib | `Disabled | `Label ], [< `Option ],
-       [> `Optgroup ]) star
+      ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Disabled
+        | `Label ], [< `Option ], [> `Optgroup ]) star
 
     val option :
-      ([< option_attrib | event_attrib ], [< option_content_fun ],
-       [> selectoption ]) unary
+      ([< option_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< option_content_fun ], [> selectoption ]) unary
 
     val textarea :
-      ([< textarea_attrib | event_attrib | `Value ], [> textarea ]) nullary
+      ([< textarea_attrib | event_attrib | `Key | `Value ],
+       [> textarea ]) nullary
 
     val keygen :
-      ([< keygen_attrib | event_attrib ], [> keygen ]) nullary
+      ([< keygen_attrib | event_attrib | `Key ], [> keygen ]) nullary
 
     val progress :
-      ([< progress_attrib | event_attrib ], [< progress_content_fun ],
-       [> progress ]) star
+      ([< progress_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< progress_content_fun ], [> progress ]) star
 
     val meter :
-      ([< meter_attrib | event_attrib ], [< meter_content_fun ],
-       [> meter ]) star
+      ([< meter_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< meter_content_fun ], [> meter ]) star
 
     val output_elt :
-      ([< output_elt_attrib | event_attrib ], [< output_elt_content_fun ],
-       [> output_elt ]) star
+      ([< output_elt_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
+       [< output_elt_content_fun ], [> output_elt ]) star
 
     val text : string -> [> `PCDATA ] elt
 

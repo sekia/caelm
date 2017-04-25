@@ -7,6 +7,9 @@ module Import
     type nonrec 'a attrib = 'a attrib
     type nonrec 'a elt = 'a elt
 
+    let a_key = a_key
+    let a_dangerouslysetinnerhtml = a_dangerouslysetinnerhtml
+
     let a_user_data = a_user_data
 
     let a_accept = a_accept

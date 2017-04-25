@@ -99,6 +99,11 @@ module Make (Reactjs : Reactjs.S) = struct
       let value = Base.Properties.Value.Unsafe.cast_event_handler h in
       Base.Xml.event_handler_attrib name value
 
+    let a_key key = ("key", `String key)
+    let a_dangerouslysetinnerhtml fragment =
+      let value = Base.Properties.Value.Unsafe.inner_html fragment in
+      ("dangerouslySetInnerHTML", `InnerHtml value)
+
     let a_accept_charset = rename_attrib a_accept_charset "acceptCharset"
     let a_accesskey = rename_attrib a_accesskey "accessKey"
     let a_autocomplete = rename_attrib a_autocomplete "autoComplete"
