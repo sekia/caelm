@@ -25,12 +25,12 @@ module Properties = struct
     let to_any =
       let open Js.Unsafe in
       function
-      | `Bool b -> if b then Some (inject (Js.string "")) else None
-      | `EventHandler h -> Some (inject (Js.wrap_callback h))
-      | `Float f -> Some (inject f)
-      | `Int i -> Some (inject i)
-      | `InnerHtml h -> Some (inject h)
-      | `String s -> Some (inject (Js.string s))
+      | `Bool b -> inject (Js.bool b)
+      | `EventHandler h -> inject (Js.wrap_callback h)
+      | `Float f -> inject f
+      | `Int i -> inject i
+      | `InnerHtml h -> inject h
+      | `String s -> inject (Js.string s)
   end
 
   type t = (string * Value.t) list
@@ -39,24 +39,11 @@ module Properties = struct
 
   let of_list l = l
 
-  let rec filter_map f = function
-    | [] -> []
-    | hd :: tl ->
-       match f hd with
-       | None -> filter_map f tl
-       | Some x -> x :: (filter_map f tl)
-
-  let to_props =
-    function
+  let to_props = function
     | [] -> Js.null
     | props ->
        props
-       |> filter_map
-            begin fun (name, value) ->
-            match Value.to_any value with
-            | None -> None
-            | Some value -> Some (name, value)
-            end
+       |> List.map (fun (name, value) -> (name, Value.to_any value))
        |> Array.of_list
        |> Js.Unsafe.obj
        |> Js.some

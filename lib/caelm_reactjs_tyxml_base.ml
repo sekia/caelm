@@ -27,6 +27,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
 
       let attrib_creator value_ctor = fun name value -> name, value_ctor value
 
+      let bool_attrib = attrib_creator (fun v -> `Bool v)
       let float_attrib = attrib_creator (fun v -> `Float v)
       let int_attrib = attrib_creator (fun v -> `Int v)
       let string_attrib = attrib_creator (fun v -> `String v)
@@ -104,6 +105,32 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
       let value = Base.Properties.Value.Unsafe.inner_html fragment in
       ("dangerouslySetInnerHTML", `InnerHtml value)
 
+    (* Few attribute combinators below have multi-word names so they are
+       immediately overriden by following definitions. This duplication is
+       intended for ease of maintenance.
+     *)
+    let a_async = Base.Xml.bool_attrib "async"
+    let a_autofocus = Base.Xml.bool_attrib "autoFocus"
+    let a_autoplay = Base.Xml.bool_attrib "autoPlay"
+    let a_checked = Base.Xml.bool_attrib "checked"
+    let a_controls = Base.Xml.bool_attrib "controls"
+    let a_defer = Base.Xml.bool_attrib "defer"
+    let a_disabled = Base.Xml.bool_attrib "disabled"
+    let a_formnovalidate = Base.Xml.bool_attrib "formNoValidate"
+    let a_hidden = Base.Xml.bool_attrib "hidden"
+    let a_loop = Base.Xml.bool_attrib "loop"
+    let a_multiple = Base.Xml.bool_attrib "multiple"
+    let a_muted = Base.Xml.bool_attrib "muted"
+    let a_novalidate = Base.Xml.bool_attrib "novalidate"
+    let a_open = Base.Xml.bool_attrib "open"
+    let a_readonly = Base.Xml.bool_attrib "readonly"
+    let a_required = Base.Xml.bool_attrib "required"
+    let a_reversed = Base.Xml.bool_attrib "reversed"
+    let a_scoped = Base.Xml.bool_attrib "scoped"
+    let a_seamless = Base.Xml.bool_attrib "seamless"
+    let a_selected = Base.Xml.bool_attrib "selected"
+
+    (* Override multi-word attribute names with camel-cased ones. *)
     let a_accept_charset = rename_attrib a_accept_charset "acceptCharset"
     let a_accesskey = rename_attrib a_accesskey "accessKey"
     let a_autocomplete = rename_attrib a_autocomplete "autoComplete"

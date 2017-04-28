@@ -40,6 +40,28 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
     val a_dangerouslysetinnerhtml :
       string -> [> `DangerouslySetInnerHTML ] attrib
 
+    (* Redefine ReactJS's boolean attributes *)
+    val a_async : bool -> [> `Async ] attrib
+    val a_autofocus : bool -> [> `Autofocus ] attrib
+    val a_autoplay : bool -> [> `Autoplay ] attrib
+    val a_checked : bool -> [> `Checked ] attrib
+    val a_controls : bool -> [> `Controls ] attrib
+    val a_defer : bool -> [> `Defer ] attrib
+    val a_disabled : bool -> [> `Disabled ] attrib
+    val a_formnovalidate : bool -> [> `Formnovalidate ] attrib
+    val a_hidden : bool -> [> `Hidden ] attrib
+    val a_loop : bool -> [> `Loop ] attrib
+    val a_multiple : bool -> [> `Multiple ] attrib
+    val a_muted : bool -> [> `Muted ] attrib
+    val a_novalidate : bool -> [> `Novalidate ] attrib
+    val a_open : bool -> [> `Open ] attrib
+    val a_readonly : bool -> [> `Readonly ] attrib
+    val a_required : bool -> [> `Required ] attrib
+    val a_reversed : bool -> [> `Reversed ] attrib
+    val a_scoped : bool -> [> `Scoped ] attrib
+    val a_seamless : bool -> [> `Seamless ] attrib
+    val a_selected : bool -> [> `Selected ] attrib
+
     (* ReactJS's synthetic event handlers *)
 
     (* Animation events *)
