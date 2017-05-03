@@ -43,7 +43,7 @@ module S = struct
       element_type -> Properties.t -> node list -> Caelm_reactjs.element Js.t
 
     val render :
-      ?callback:(unit -> unit) -> Dom_html.element Js.t ->
+      ?callback:(unit -> unit) -> container:Dom_html.element Js.t ->
       Caelm_reactjs.element Js.t -> Dom_html.element Js.t
   end
 end

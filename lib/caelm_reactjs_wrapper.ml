@@ -81,7 +81,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
       | _ -> Array.(children |> of_list |> map any_of_node |> array |> some) in
     Caelm_reactjs.react##(createElement type_ props children)
 
-  let render ?callback container element =
+  let render ?callback ~container element =
     let callback = Js.Optdef.(map (option callback)) Js.wrap_callback in
     Caelm_reactjs.react_dom##(render element container callback)
 end

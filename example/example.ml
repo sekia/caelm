@@ -84,7 +84,7 @@ module View = struct
         ; p [ text (State.time state) ]
         ]
     |> to_react_element
-    |> Wrapper.render container
+    |> Wrapper.render ~container
 end
 
 module App = Caelm.Make_with_lwt (State) (View)
