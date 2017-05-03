@@ -42,44 +42,27 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
       let keyboard_event_handler_attrib = event_handler_attrib
       let mouse_event_handler_attrib = event_handler_attrib
 
-      type elt =
-        | Empty
-        | Element of { attributes : attrib list
-                     ; name : string
-                     ; children : elt list
-                     }
-        | Text of string
+      type elt = Wrapper.node
 
-      let to_react_element element =
-        let rec to_react_element = function
-          | Empty -> `String ""
-          | Element { attributes; name; children } ->
-            let props = Properties.of_list attributes in
-            let children = List.map to_react_element children in
-            `Element (Wrapper.create_element (`Tag name) props children)
-          | Text s -> `String s in
-        match to_react_element element with
-        | `String _ -> None
-        | `Element e -> Some e
-
-      let empty () = Empty
+      let empty () = `String ""
 
       let comment _ = failwith "comment: Not used in ReactJS"
 
-      let cdata s = Text s
+      let cdata s = `String s
 
       let cdata_script = cdata
 
       let cdata_style = cdata
 
-      let pcdata s = Text s
+      let pcdata s = `String s
 
       let encodedpcdata _ = failwith "encodedpcdata: Not used in ReactJS."
 
       let entity _ = failwith "entity: Not used in ReactJS."
 
       let node ?a:(attributes=[]) name children =
-        Element { attributes; name; children }
+        let props = Properties.of_list attributes in
+        `Element (Wrapper.create_element (`Tag name) props children)
 
       let leaf ?a:(attributes=[]) name = node ~a:attributes name []
     end
@@ -240,12 +223,8 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
 
     let text = pcdata
 
-    let to_react_element elt =
-      let elt = match toelt elt with
-        | Base.Xml.Text s -> toelt (span [ pcdata s ])
-        | _ -> toelt elt in
-      match Base.Xml.to_react_element elt with
-      | None -> assert false
-      | Some elt -> elt
+    let rec to_react_element = function
+      | `String s -> to_react_element (span [ text s ])
+      | `Element e -> e
   end
 end

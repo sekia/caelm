@@ -9,13 +9,7 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
     module Xml : sig
       type attrib = string * Properties.Value.t
 
-      type elt =
-        | Empty
-        | Element of { attributes : attrib list
-                     ; name : string
-                     ; children : elt list
-                     }
-        | Text of string
+      type elt = Caelm_reactjs_wrapper.Make(Reactjs).node
 
       type event_handler = Properties.Value.event_handler
 
@@ -24,8 +18,6 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
          and type elt := elt
          and type event_handler := event_handler
          and type uri = Uri.t
-
-      val to_react_element : elt -> Reactjs.element Js.t option
     end
 
     module Svg : Svg_sigs.Make(Xml).T
