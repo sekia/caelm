@@ -14,7 +14,7 @@ module Make
     module Types = struct
       type phase = Ready | Running | Terminated
       type t = { phase : phase; state : State.t }
-      type input = Message of State.message | Nop | Terminate
+      type input = Message of State.message | Terminate
     end
     include Types
 
@@ -36,7 +36,6 @@ module Make
         fun _ -> (app, None)
       | { phase = Running; state } as app ->
         function
-        | Nop -> app, None
         | Terminate -> { app with phase = Terminated }, None
         | Message m ->
           let state, command = State.update state m in
