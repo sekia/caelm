@@ -1,1 +1,1 @@
-true: bin_annot, debug, package(lwt,lwt.ppx,lwt_react,js_of_ocaml,js_of_ocaml.ppx,js_of_ocaml.weak,tyxml,uri)
+true: bin_annot, debug, package(lwt,lwt.ppx,lwt_react,js_of_ocaml,js_of_ocaml.ppx,js_of_ocaml.weak,ppx_sexp_conv,sexplib,tyxml,uri)

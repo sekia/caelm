@@ -9,4 +9,4 @@ clean:
 	$(OCB) -clean
 
 example:
-	$(OCB) $(OCB_FLAGS) -I example example.js
+	$(OCB) $(OCB_FLAGS) -I example app.js
