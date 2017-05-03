@@ -1,4 +1,4 @@
-module S = Caelm_intf.S
+include Caelm_intf
 
 module Make
   (Thread : S.Thread) (React : S.React)
