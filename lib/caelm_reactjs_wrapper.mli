@@ -4,6 +4,6 @@ module Properties : S.Properties
 
 module Unsafe : S.Unsafe
 
-module Make (Caelm_reactjs : Caelm_reactjs.S) : S.Wrapper
-  with module Caelm_reactjs := Caelm_reactjs
+module Make (Reactjs : Caelm_reactjs.S) : S.Wrapper
+  with module Reactjs := Reactjs
    and module Properties := Properties

@@ -61,10 +61,10 @@ module Unsafe = struct
     Optdef.get opt (fun () -> invalid_arg "Unsafe.get_optdef_exn: undefined")
 end
 
-module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
+module Make (Reactjs : Caelm_reactjs.S) = struct
   type element_type = [ `Tag of string ]
 
-  type node = [ `String of string | `Element of Caelm_reactjs.element Js.t ]
+  type node = [ `String of string | `Element of Reactjs.element Js.t ]
 
   let any_of_node =
     let open Js in
@@ -79,9 +79,9 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
     let children = match children with
       | [] -> null
       | _ -> Array.(children |> of_list |> map any_of_node |> array |> some) in
-    Caelm_reactjs.react##(createElement type_ props children)
+    Reactjs.react##(createElement type_ props children)
 
   let render ?callback ~container element =
     let callback = Js.Optdef.(map (option callback)) Js.wrap_callback in
-    Caelm_reactjs.react_dom##(render element container callback)
+    Reactjs.react_dom##(render element container callback)
 end

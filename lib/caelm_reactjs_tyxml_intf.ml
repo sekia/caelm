@@ -1,6 +1,6 @@
 module Import
-    (Caelm_reactjs : Caelm_reactjs.S)
-    (Base : module type of Caelm_reactjs_tyxml_base.Make (Caelm_reactjs)) =
+    (Reactjs : Caelm_reactjs.S)
+    (Base : module type of Caelm_reactjs_tyxml_base.Make (Reactjs)) =
 struct
   module Html = struct
     open Base.Html
@@ -298,6 +298,6 @@ struct
   end
 end
 
-module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
-  include Import (Caelm_reactjs) (Caelm_reactjs_tyxml_base.Make(Caelm_reactjs))
+module Make (Reactjs : Caelm_reactjs.S) = struct
+  include Import (Reactjs) (Caelm_reactjs_tyxml_base.Make(Reactjs))
 end

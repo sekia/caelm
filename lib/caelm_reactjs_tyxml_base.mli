@@ -2,7 +2,7 @@ open Html_types
 open Caelm_reactjs_tyxml_base_intf
 open Caelm_reactjs_wrapper
 
-module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
+module Make (Reactjs : Caelm_reactjs.S) : sig
   module Base : sig
     module Properties : Caelm_reactjs_wrapper.S.Properties
 
@@ -25,7 +25,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
          and type event_handler := event_handler
          and type uri = Uri.t
 
-      val to_react_element : elt -> Caelm_reactjs.element Js.t option
+      val to_react_element : elt -> Reactjs.element Js.t option
     end
 
     module Svg : Svg_sigs.Make(Xml).T
@@ -612,6 +612,6 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
 
     val text : string -> [> `PCDATA ] elt
 
-    val to_react_element : 'a elt -> Caelm_reactjs.element Js.t
+    val to_react_element : 'a elt -> Reactjs.element Js.t
   end
 end
