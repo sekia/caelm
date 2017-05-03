@@ -39,11 +39,12 @@ module S = struct
 
     type element_type = [ `Tag of string ]
 
-    val create_element : element_type -> Properties.t -> node list ->
-                         Caelm_reactjs.element Js.t
+    val create_element :
+      element_type -> Properties.t -> node list -> Caelm_reactjs.element Js.t
 
-    val render : ?callback:(unit -> unit) -> Dom_html.element Js.t ->
-                 Caelm_reactjs.element Js.t -> Dom_html.element Js.t
+    val render :
+      ?callback:(unit -> unit) -> Dom_html.element Js.t ->
+      Caelm_reactjs.element Js.t -> Dom_html.element Js.t
   end
 end
 
@@ -114,8 +115,8 @@ class type data_transfer_item =
 
 class type data_transfer_item_list =
   object
-    method add_string : js_string t -> js_string t ->
-                        data_transfer_item t opt meth
+    method add_string :
+      js_string t -> js_string t -> data_transfer_item t opt meth
     method add_file : file t -> data_transfer_item t opt meth
     method clear : unit meth
     method length : int readonly_prop
@@ -224,7 +225,7 @@ class type ['t] keyboard_event =
     method repeat : bool t readonly_prop
     (* According to https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent,
        |which| is deprecated so we trimmed it off here. Use |keyCode| instead.
-     *)
+    *)
   end
 
 class type ['t] mouse_event =

@@ -42,11 +42,11 @@ module Properties = struct
   let to_props = function
     | [] -> Js.null
     | props ->
-       props
-       |> List.map (fun (name, value) -> (name, Value.to_any value))
-       |> Array.of_list
-       |> Js.Unsafe.obj
-       |> Js.some
+      props
+      |> List.map (fun (name, value) -> (name, Value.to_any value))
+      |> Array.of_list
+      |> Js.Unsafe.obj
+      |> Js.some
 end
 
 module Unsafe = struct

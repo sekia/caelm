@@ -20,10 +20,10 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
       type event_handler = Properties.Value.event_handler
 
       include Xml_sigs.NoWrap
-              with type attrib := attrib
-               and type elt := elt
-               and type event_handler := event_handler
-               and type uri = Uri.t
+        with type attrib := attrib
+         and type elt := elt
+         and type event_handler := event_handler
+         and type uri = Uri.t
 
       val to_react_element : elt -> Caelm_reactjs.element Js.t option
     end
@@ -455,13 +455,13 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
 
     val iframe :
       ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Src | `Name
-        | `Sandbox | `Seamless | `Width | `Height ], [< `PCDATA ], [> `Iframe ]
+       | `Sandbox | `Seamless | `Width | `Height ], [< `PCDATA ], [> `Iframe ]
       ) star
 
     val object_ :
       ?params:[< `Param ] elt list ->
       ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Data
-        | `Form | `Mime_type | `Height | `Width | `Name | `Usemap ], 'a,
+       | `Form | `Mime_type | `Height | `Width | `Name | `Usemap ], 'a,
        [> `Object of 'a ]) star
 
     val param :
@@ -493,7 +493,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
     val area :
       alt:text ->
       ([< common | event_attrib | `Key | `Alt | `Coords | `Shape | `Target
-        | `Rel | `Media | `Hreflang | `Mime_type], [> `Area ]) nullary
+       | `Rel | `Media | `Hreflang | `Mime_type], [> `Area ]) nullary
 
     val map :
       ([< map_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ], 'a,
@@ -556,7 +556,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
     val fieldset :
       ?legend:[< `Legend ] elt ->
       ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Disabled
-        | `Form | `Name ], [< flow5 ], [> `Fieldset ]) star
+       | `Form | `Name ], [< flow5 ], [> `Fieldset ]) star
 
     val legend :
       ([< legend_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
@@ -575,17 +575,17 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) : sig
 
     val select :
       ([< select_attrib | event_attrib | `DangerouslySetInnerHTML | `Key
-        | `Value ], [< select_content_fun ], [> select ]) star
+       | `Value ], [< select_content_fun ], [> select ]) star
 
     val datalist :
       ?children:[< `Options of [< `Option ] elt list
-                 | `Phras of [< phrasing ] elt list ] ->
+                | `Phras of [< phrasing ] elt list ] ->
       ([< common | event_attrib | `Key ], [> `Datalist ]) nullary
 
     val optgroup :
       label:text ->
       ([< common | event_attrib | `DangerouslySetInnerHTML | `Key | `Disabled
-        | `Label ], [< `Option ], [> `Optgroup ]) star
+       | `Label ], [< `Option ], [> `Optgroup ]) star
 
     val option :
       ([< option_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],

@@ -26,16 +26,17 @@ module S = struct
   module type View = sig
     type state
     type message
-    val render : (message -> unit) -> Dom_html.element Js.t -> state ->
-                 Dom_html.element Js.t
+    val render :
+      (message -> unit) -> Dom_html.element Js.t -> state ->
+      Dom_html.element Js.t
   end
 
   module type Subscription = sig
     module Thread : Thread
     module React : React
     module State : State with module Thread := Thread
-    val start : State.t React.signal ->
-                State.message React.event * (unit -> unit)
+    val start :
+      State.t React.signal -> State.message React.event * (unit -> unit)
   end
 
   module type App = sig
@@ -48,8 +49,9 @@ module S = struct
                     and module React := React
                     and module State := State
     val create : State.t -> t
-    val run : t -> ?subscriptions:(module Subscription) list ->
-              Dom_html.element Js.t -> unit -> t
+    val run :
+      t -> ?subscriptions:(module Subscription) list -> Dom_html.element Js.t ->
+      unit -> t
   end
 end
 

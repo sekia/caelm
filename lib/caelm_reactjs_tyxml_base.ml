@@ -54,9 +54,9 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
         let rec to_react_element = function
           | Empty -> `String ""
           | Element { attributes; name; children } ->
-             let props = Properties.of_list attributes in
-             let children = List.map to_react_element children in
-             `Element (Wrapper.create_element (`Tag name) props children)
+            let props = Properties.of_list attributes in
+            let children = List.map to_react_element children in
+            `Element (Wrapper.create_element (`Tag name) props children)
           | Text s -> `String s in
         match to_react_element element with
         | `String _ -> None
@@ -97,8 +97,8 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
 
     let event_handler_attrib name =
       fun h ->
-      let value = Base.Properties.Value.Unsafe.cast_event_handler h in
-      Base.Xml.event_handler_attrib name value
+        let value = Base.Properties.Value.Unsafe.cast_event_handler h in
+        Base.Xml.event_handler_attrib name value
 
     let a_key key = ("key", `String key)
     let a_dangerouslysetinnerhtml fragment =
@@ -108,7 +108,7 @@ module Make (Caelm_reactjs : Caelm_reactjs.S) = struct
     (* Few attribute combinators below have multi-word names so they are
        immediately overriden by following definitions. This duplication is
        intended for ease of maintenance.
-     *)
+    *)
     let a_async = Base.Xml.bool_attrib "async"
     let a_autofocus = Base.Xml.bool_attrib "autoFocus"
     let a_autoplay = Base.Xml.bool_attrib "autoPlay"
