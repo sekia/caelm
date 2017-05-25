@@ -1,1 +1,57 @@
-true: bin_annot, debug, package(lwt,lwt.ppx,lwt_react,js_of_ocaml,js_of_ocaml.ppx,js_of_ocaml.weak,ppx_sexp_conv,sexplib,tyxml,uri)
+# OASIS_START
+# DO NOT EDIT (digest: 84bdcc82366d1723a5f228058cc598fe)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library caelm
+"lib/caelm.cmxs": use_caelm
+# Library caelm_lwt
+"lib/caelm_lwt.cmxs": use_caelm_lwt
+<lib/*.ml{,i,y}>: package(lwt)
+<lib/*.ml{,i,y}>: package(lwt_react)
+# Library caelm_tyxml
+"lib/caelm_tyxml.cmxs": use_caelm_tyxml
+<lib/*.ml{,i,y}>: package(js_of_ocaml)
+<lib/*.ml{,i,y}>: package(js_of_ocaml.ppx)
+<lib/*.ml{,i,y}>: package(react)
+<lib/*.ml{,i,y}>: package(tyxml)
+<lib/*.ml{,i,y}>: package(uri)
+<lib/*.ml{,i,y}>: use_caelm
+# Executable example_app
+"example/app.byte": package(js_of_ocaml)
+"example/app.byte": package(js_of_ocaml.ppx)
+"example/app.byte": package(lwt)
+"example/app.byte": package(lwt_react)
+"example/app.byte": package(ppx_sexp_conv)
+"example/app.byte": package(react)
+"example/app.byte": package(sexplib)
+"example/app.byte": package(tyxml)
+"example/app.byte": package(uri)
+"example/app.byte": use_caelm
+"example/app.byte": use_caelm_lwt
+"example/app.byte": use_caelm_tyxml
+<example/*.ml{,i,y}>: package(js_of_ocaml)
+<example/*.ml{,i,y}>: package(js_of_ocaml.ppx)
+<example/*.ml{,i,y}>: package(lwt)
+<example/*.ml{,i,y}>: package(lwt_react)
+<example/*.ml{,i,y}>: package(ppx_sexp_conv)
+<example/*.ml{,i,y}>: package(react)
+<example/*.ml{,i,y}>: package(sexplib)
+<example/*.ml{,i,y}>: package(tyxml)
+<example/*.ml{,i,y}>: package(uri)
+<example/*.ml{,i,y}>: use_caelm
+<example/*.ml{,i,y}>: use_caelm_lwt
+<example/*.ml{,i,y}>: use_caelm_tyxml
+# OASIS_STOP
+"example/app.js": package(js_of_ocaml.weak)

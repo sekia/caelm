@@ -56,5 +56,4 @@ module S = struct
 end
 
 module Reactjs = Caelm_reactjs
-module Reactjs_tyxml = Caelm_reactjs_tyxml
 module Reactjs_wrapper = Caelm_reactjs_wrapper

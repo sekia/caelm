@@ -103,7 +103,7 @@ module State = struct
 end
 
 module View = struct
-  module Tyxml = Caelm.Reactjs_tyxml.Make (Reactjs)
+  module Tyxml = Caelm_reactjs_tyxml.Make (Reactjs)
   module Wrapper = Caelm.Reactjs_wrapper.Make (Reactjs)
 
   open State
@@ -238,7 +238,7 @@ module View = struct
     |> Wrapper.render ~container
 end
 
-module App = Caelm.Make_with_lwt (State) (View)
+module App = Caelm_lwt.Make (State) (View)
 
 let () =
   let root =

@@ -98,5 +98,3 @@ module Make
         S.stop ~strong renderer;
         S.value app
 end
-
-module Make_with_lwt = Make (Lwt) (Lwt_react)
