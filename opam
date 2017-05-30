@@ -1,0 +1,26 @@
+opam-version: "1.2"
+name: "caelm"
+version: "0.0.1"
+maintainer: "Koichi SATOH <r.sekia@gmail.com>"
+authors: "Koichi SATOH <r.sekia@gmail.com>"
+homepage: "https://github.com/sekia/caelm/"
+bug-reports: "https://github.com/sekia/caelm/issues"
+license: "MIT"
+dev-repo: "git@github.com:sekia/caelm.git"
+build: [
+  ["ocaml" "setup.ml" "-configure" "--prefix" "%{prefix}%" "--disable-debug"]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove: ["ocamlfind" "remove" "caelm"]
+depends: [
+  "ocamlbuild" {build}
+  "ocamlfind" {build}
+  "js_of_ocaml" {>= "2.8.4"}
+  "lwt" {>= "3.0.0"}
+  "lwt_react" {>= "1.0.0"}
+  "react"
+  "tyxml"
+  "uri"
+]
+ocaml-version: [>= "4.01"]
