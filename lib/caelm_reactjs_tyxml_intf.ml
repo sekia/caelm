@@ -5,9 +5,6 @@ struct
   module Html = struct
     open Base.Html
 
-    type nonrec 'a attrib = 'a attrib
-    type nonrec 'a elt = 'a elt
-
     let a_key = a_key
     let a_dangerouslysetinnerhtml = a_dangerouslysetinnerhtml
 

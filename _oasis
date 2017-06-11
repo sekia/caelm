@@ -46,9 +46,9 @@ Library "caelm_tyxml"
   CompiledObject: byte
   FindLibName: tyxml
   FindLibParent: caelm
-  Modules: Caelm_reactjs_tyxml
+  Modules: Caelm_reactjs_tyxml, Caelm_reactjs_tyxml_base
   InternalModules:
-    Caelm_reactjs_tyxml_base, Caelm_reactjs_tyxml_base_intf,
+    Caelm_reactjs_tyxml_base_intf,
     Caelm_reactjs_tyxml_intf
   Path: lib
 
