@@ -68,9 +68,9 @@ module State = struct
     todos
 
   let save_todos todos =
-    let serialized = sexp_of_todos todos |> Sexplib.Sexp.to_string_mach in
-    let open Js.Unsafe in
-    global##.localStorage##.todos := serialized;
+    let serialized =
+      sexp_of_todos todos |> Sexplib.Sexp.to_string_mach |> Js.string in
+    Js.Unsafe.global##.localStorage##.todos := serialized;
     Lwt.return Todo_saved
 
   let create () = { filter = All; input = ""; todos = load_todos () }
