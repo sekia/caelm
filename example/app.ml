@@ -55,14 +55,20 @@ module State = struct
 
   type command = message Lwt.t
 
+  let local_storage =
+    Dom_html.window##.localStorage
+    |> Caelm.Reactjs_wrapper.Unsafe.optdef_get_exn
+
+  let storage_key = Js.string "todos"
+
   let load_todos () =
-    let open Js.Unsafe in
-    let serialized =
-      Js.Optdef.case
-        global##.localStorage##.todos
-        (fun () -> "()")
-        Js.to_string in
-    let todos = serialized |> Sexplib.Sexp.of_string |> todos_of_sexp in
+    let todos =
+      let deserialize s =
+        Js.to_string s |> Sexplib.Sexp.of_string |> todos_of_sexp in
+      Js.Opt.case
+        local_storage##(getItem storage_key)
+        (fun () -> [])
+        deserialize in
     let latest_id = List.map Todo.id todos |> List.fold_left max 0 in
     Todo.set_next_id (latest_id + 1);
     todos
@@ -70,7 +76,7 @@ module State = struct
   let save_todos todos =
     let serialized =
       sexp_of_todos todos |> Sexplib.Sexp.to_string_mach |> Js.string in
-    Js.Unsafe.global##.localStorage##.todos := serialized;
+    local_storage##(setItem storage_key serialized);
     Lwt.return Todo_saved
 
   let create () = { filter = All; input = ""; todos = load_todos () }
