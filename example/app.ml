@@ -231,11 +231,9 @@ module View = struct
                          ~add_todo ~update_input ~replace_todo
                          ~input:state.input ~todos:visible_todos
                      ]
-            ; section ~a:[ a_id "todo-list" ]
-                      [ ul (List.rev_map
-                              (fun t -> (todo ~replace_todo t))
-                              visible_todos)
-                      ]
+            ; section
+                ~a:[ a_id "todo-list" ]
+                [ ul (List.rev_map (todo ~replace_todo) visible_todos) ]
             ; footer_controls
                 ~remove_todo ~set_filter
                 ~filter:state.filter ~todos:state.todos
