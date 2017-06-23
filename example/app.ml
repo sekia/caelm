@@ -219,7 +219,7 @@ module View = struct
                   ]
            ]
 
-  let render send container state =
+  let render ~send ~container state =
     let add_todo todo = send (Add_todo todo) in
     let remove_todo todo = send (Remove_todo todo) in
     let replace_todo old new_ = send (Replace_todo (old, new_)) in
@@ -247,9 +247,9 @@ end
 module App = Caelm_lwt.Make (State) (View)
 
 let () =
-  let root =
+  let container =
     Dom_html.document##(getElementById (Js.string "todo-app"))
     |> Caelm.Reactjs_wrapper.Unsafe.opt_get_exn in
-  let app = App.create (State.create ()) in
-  let terminate = App.run app root in
-  Js.export "terminateApp" terminate
+  let app = App.run ~container (State.create ()) in
+  let terminate () = App.terminate app in
+  Js.(export "terminateApp" @@ wrap_callback terminate)

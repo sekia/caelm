@@ -27,7 +27,7 @@ module S = struct
     type state
     type message
     val render :
-      (message -> unit) -> Dom_html.element Js.t -> state ->
+      send:(message -> unit) -> container:Dom_html.element Js.t -> state ->
       Dom_html.element Js.t
   end
 
@@ -48,10 +48,11 @@ module S = struct
       Subscription with module Thread := Thread
                     and module React := React
                     and module State := State
-    val create : State.t -> t
     val run :
-      t -> ?subscriptions:(module Subscription) list -> Dom_html.element Js.t ->
-      unit -> t
+      ?subscriptions:(module Subscription) list ->
+      container:Dom_html.element Js.t -> State.t -> t
+    val send : t -> State.message -> unit
+    val terminate : t -> State.t
   end
 end
 
