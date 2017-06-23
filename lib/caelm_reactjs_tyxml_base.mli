@@ -602,7 +602,7 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
       ([< output_elt_attrib | event_attrib | `DangerouslySetInnerHTML | `Key ],
        [< output_elt_content_fun ], [> output_elt ]) star
 
-    val text : string -> [> `PCDATA ] elt
+    val pcdata : string -> [> `PCDATA ] elt
 
     val to_react_element : 'a elt -> Reactjs.element Js.t
   end

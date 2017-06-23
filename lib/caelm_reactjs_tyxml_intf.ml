@@ -289,7 +289,7 @@ struct
     let rp = rp
     let ruby = ruby
 
-    let text = text
+    let pcdata = pcdata
 
     let to_react_element = to_react_element
   end

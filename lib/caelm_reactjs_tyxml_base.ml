@@ -221,10 +221,10 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
 
     let select = Unsafe.node "select"
 
-    let text = pcdata
+    let pcdata = pcdata
 
     let rec to_react_element = function
-      | `String s -> to_react_element (span [ text s ])
+      | `String s -> to_react_element (span [ pcdata s ])
       | `Element e -> e
   end
 end
