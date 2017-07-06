@@ -25,3 +25,9 @@ package "lwt" (
 )
 # OASIS_STOP
 
+package "reactjs" (
+  version = "15.6.1"
+  description = "Facebook's React/ReactDOM library"
+  linkopts(javascript) = "+caelm/react.js +caelm/react-dom.js"
+  exists_if = "react.js"
+)

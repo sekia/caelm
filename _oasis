@@ -7,6 +7,7 @@ License: MIT
 Plugins: META (0.4)
 OCamlVersion: >= 4.01
 AlphaFeatures: ocamlbuild_more_args
+BetaFeatures: findlib_extra_files
 XOCamlbuildPluginTags: package(js_of_ocaml.ocamlbuild)
 
 Flag "example"
@@ -25,6 +26,7 @@ Library "caelm"
   BuildDepends: js_of_ocaml, js_of_ocaml.ppx, react
   BuildTools: ocamlbuild
   CompiledObject: byte
+  FindLibExtraFiles: react.js, react-dom.js
   Modules: Caelm, Caelm_reactjs, Caelm_reactjs_wrapper
   InternalModules: Caelm_intf, Caelm_reactjs_intf, Caelm_reactjs_wrapper_intf
   Path: lib
