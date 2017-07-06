@@ -4,10 +4,12 @@ Version: 0.0.1
 Synopsis: The Elm Architecture riding on camelback
 Authors: Koichi SATOH <r.sekia@gmail.com>
 License: MIT
-Plugins: META (0.4)
+Plugins: DevFiles (0.4), META (0.4)
 OCamlVersion: >= 4.01
 AlphaFeatures: ocamlbuild_more_args
 BetaFeatures: findlib_extra_files
+XDevFilesEnableConfigure: true
+XDevFilesEnableMakefile: true
 XOCamlbuildPluginTags: package(js_of_ocaml.ocamlbuild)
 
 Flag "example"
