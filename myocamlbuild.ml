@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: c368158ed2996309887fc9ab04d452db) *)
+(* DO NOT EDIT (digest: 886193ae2c145716224eda821c8504d7) *)
 module OASISGettext = struct
 (* # 22 "src/oasis/OASISGettext.ml" *)
 
@@ -887,7 +887,7 @@ let package_default =
        ];
      lib_c = [];
      flags = [];
-     includes = [("example", ["lib"])]
+     includes = []
   }
   ;;
 
@@ -897,9 +897,3 @@ let dispatch_default = MyOCamlbuildBase.dispatch_default conf package_default;;
 
 # 899 "myocamlbuild.ml"
 (* OASIS_STOP *)
-Ocamlbuild_plugin.dispatch
-  begin fun hook ->
-    dispatch_default hook;
-    Ocamlbuild_js_of_ocaml.dispatcher
-      ~oasis_executables:[ "example/app.byte" ] hook
-  end

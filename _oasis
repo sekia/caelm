@@ -12,10 +12,6 @@ XDevFilesEnableConfigure: true
 XDevFilesEnableMakefile: true
 XOCamlbuildPluginTags: package(js_of_ocaml.ocamlbuild)
 
-Flag "example"
-  Description: Build example application
-  Default: false
-
 Flag "lwt"
   Description: Build shorthand functor using Lwt
   Default: true
@@ -55,13 +51,3 @@ Library "caelm_tyxml"
     Caelm_reactjs_tyxml_base_intf,
     Caelm_reactjs_tyxml_intf
   Path: lib
-
-Executable "example_app"
-  Build$: flag(example) && flag(lwt) && flag(tyxml)
-  BuildDepends:
-    caelm.lwt, caelm.tyxml, js_of_ocaml, js_of_ocaml.ppx, sexplib, ppx_sexp_conv
-  BuildTools: ocamlbuild
-  CompiledObject: byte
-  Install: false
-  MainIs: app.ml
-  Path: example
