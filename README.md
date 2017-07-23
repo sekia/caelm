@@ -3,6 +3,8 @@ Caelm - The Elm Architecture riding on camelback
 
 This library is a set of functors for writing [the Elm Architecture](http://elm-lang.org/) based Web frontend in OCaml.
 
+Check out an [example TODO application](https://sekia.github.io/todomvc/index.html). Its all functions, including React.js driven UI, are implemented with only 210 source lines of code, in stateless and type safe manner.
+
 License
 ---
 
