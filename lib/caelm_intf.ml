@@ -50,6 +50,7 @@ module S = struct
                     and module State := State
     val run :
       ?subscriptions:(module Subscription) list ->
+      ?initial_command:State.command ->
       container:Dom_html.element Js.t -> State.t -> t
     val send : t -> State.message -> unit
     val terminate : t -> State.t

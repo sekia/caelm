@@ -23,12 +23,13 @@ module Make
        because commands can perform with side effects. *)
     | Some c, Some d -> c == d
 
-  let run ?(subscriptions=[]) ~container initial =
+  let run ?(subscriptions=[]) ?initial_command ~container initial_state =
     let open React in
     let event, send = E.create () in
     let state, command_dispatcher =
       let pair =
-        S.fold (fun (state, _) -> State.update state) (initial, None) event in
+        S.fold (fun (state, _) -> State.update state)
+          (initial_state, initial_command) event in
       let state = S.Pair.fst ~eq:State.equal pair in
       let command = S.Pair.snd ~eq:equal_command_opt pair in
       let dispatch = function
