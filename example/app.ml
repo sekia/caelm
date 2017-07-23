@@ -1,13 +1,8 @@
 open Sexplib.Std
 
-module Scope = struct
-  let scope = Js.Unsafe.global
-  let var_name = function
-    | `React -> "React"
-    | `ReactDOM -> "ReactDOM"
-end
-
-module Reactjs = Caelm.Reactjs.Make (Scope)
+module Reactjs = Caelm.Reactjs.Make_with_require (struct
+    let require = Js.Unsafe.variable "require"
+  end)
 
 module Todo = struct
   type state = Editing | View [@@deriving sexp]

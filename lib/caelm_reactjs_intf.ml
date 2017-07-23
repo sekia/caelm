@@ -25,3 +25,7 @@ module type Scope = sig
   val scope : < .. > t
   val var_name : [< `React | `ReactDOM ] -> string
 end
+
+module type Require = sig
+  val require : js_string t -> < .. > t
+end
