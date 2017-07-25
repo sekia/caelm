@@ -1,6 +1,3 @@
 /_build/
-/example/_build/
-/example/node_modules/
-/example/bundle.*
 /setup.data
 /setup.log
