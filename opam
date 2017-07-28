@@ -8,7 +8,7 @@ bug-reports: "https://github.com/sekia/caelm/issues"
 license: "MIT"
 dev-repo: "git@github.com:sekia/caelm.git"
 build: [
-  ["ocaml" "setup.ml" "-configure" "--prefix" "%{prefix}%" "--disable-debug"]
+  ["ocaml" "setup.ml" "-configure" "--prefix" "%{prefix}%"]
   ["ocaml" "setup.ml" "-build"]
 ]
 install: ["ocaml" "setup.ml" "-install"]
