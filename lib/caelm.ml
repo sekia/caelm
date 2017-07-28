@@ -15,14 +15,6 @@ module Make
     ; state : State.t React.signal
     ; terminate : unit -> State.t }
 
-  let equal_command_opt c d =
-    match c, d with
-    | None, None -> true
-    | None, Some _ | Some _, None -> false
-    (* Note that physical equality check ( == ) is used here,
-       because commands can perform with side effects. *)
-    | Some c, Some d -> c == d
-
   let run ?(subscriptions=[]) ?initial_command ~container initial_state =
     let open React in
     let event, send = E.create () in
@@ -31,7 +23,7 @@ module Make
         S.fold (fun (state, _) -> State.update state)
           (initial_state, initial_command) event in
       let state = S.Pair.fst ~eq:State.equal pair in
-      let command = S.Pair.snd ~eq:equal_command_opt pair in
+      let command = S.Pair.snd ~eq:( == ) pair in
       let dispatch = function
         | None -> ()
         | Some command -> Thread.(async (fun () -> map send command)) in
