@@ -13,7 +13,8 @@ module Make
   type t =
     { send : State.message -> unit
     ; state : State.t React.signal
-    ; terminate : unit -> State.t }
+    ; terminate : unit -> State.t
+    }
 
   let run ?(subscriptions=[]) ?initial_command ~container initial_state =
     let open React in
