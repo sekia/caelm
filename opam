@@ -16,7 +16,9 @@ remove: ["ocamlfind" "remove" "caelm"]
 depends: [
   "ocamlbuild" {build}
   "ocamlfind" {build}
-  "js_of_ocaml" {>= "2.8.4"}
+  "js_of_ocaml" {>= "3.0"}
+  "js_of_ocaml-ocamlbuild" {>= "3.0"}
+  "js_of_ocaml-ppx" {>= "3.0"}
   "lwt" {>= "3.0.0"}
   "lwt_react" {>= "1.0.0"}
   "react"
