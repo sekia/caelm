@@ -1,14 +1,13 @@
 include Caelm_reactjs_intf
 
-let wrap_react react =
-  object%js
-    method createElement type_ props children =
-      let open Js in
-      let open Unsafe in
-      let args = Opt.get children (fun () -> new%js array_empty) in
-      ignore @@ args##(unshift_2 (inject type_) (inject props));
-      fun_call react##.createElement (to_array args)
-  end
+let wrap_react react = object%js
+  method createElement type_ props children =
+    let open Js in
+    let open Unsafe in
+    let args = Opt.get children (fun () -> new%js array_empty) in
+    ignore @@ args##(unshift_2 (inject type_) (inject props));
+    fun_call react##.createElement (to_array args)
+end
 
 module Make (Scope : Scope) = struct
   type element
