@@ -9,9 +9,16 @@ let wrap_react react = object%js
     fun_call react##.createElement (to_array args)
 end
 
-module Make (Scope : Scope) = struct
+module Types = struct
   type element
   type props
+  type state
+  type nonrec component = (element, props, state) component
+  type component_class = (props Js.t -> component Js.t) Js.constr
+end
+
+module Make (Scope : Scope) = struct
+  include Types
 
   let get var =
     let prop = Js.string (Scope.var_name var) in
@@ -23,8 +30,7 @@ module Make (Scope : Scope) = struct
 end
 
 module Make_with_require (Require : Require) = struct
-  type element
-  type props
+  include Types
 
   let react = wrap_react @@ Require.require (Js.string "react")
 

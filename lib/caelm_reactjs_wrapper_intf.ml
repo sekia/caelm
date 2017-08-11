@@ -35,9 +35,10 @@ module S = struct
     module Reactjs : Caelm_reactjs.S
     module Properties : Properties
 
-    type node = [ `String of string | `Element of Reactjs.element Js.t ]
+    type element_type =
+      [ `Component of Reactjs.component_class | `Tag of string ]
 
-    type element_type = [ `Tag of string ]
+    type node = [ `String of string | `Element of Reactjs.element Js.t ]
 
     val create_element :
       element_type -> Properties.t -> node list -> Reactjs.element Js.t

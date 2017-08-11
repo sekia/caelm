@@ -62,7 +62,7 @@ module Unsafe = struct
 end
 
 module Make (Reactjs : Caelm_reactjs.S) = struct
-  type element_type = [ `Tag of string ]
+  type element_type = [ `Component of Reactjs.component_class | `Tag of string ]
 
   type node = [ `String of string | `Element of Reactjs.element Js.t ]
 
@@ -72,9 +72,13 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
     | `String s -> Unsafe.inject (string s)
     | `Element e -> Unsafe.inject e
 
-  let create_element (`Tag type_) props children =
+  let create_element type_ props children =
     let open Js in
-    let type_ = string type_ in
+    let type_ =
+      let open Caelm_reactjs.Or_js_string in
+      match type_ with
+      | `Component c -> of_component_class c
+      | `Tag s -> of_js_string (Js.string s) in
     let props = Properties.to_props props in
     let children = match children with
       | [] -> null

@@ -1,9 +1,31 @@
 open Js
 
-class type ['element, 'props] react = object
+class type ['element, 'props, 'state] component = object
+  method props : 'props t readonly_prop
+  method render : 'element t meth
+  method setState : 'state t -> unit meth
+  method state : 'state t readonly_prop
+end
+
+type ('element, 'props, 'state) component_class =
+  ('props t -> ('element, 'props, 'state) component t) constr
+
+module Or_js_string : sig
+  type 'component_class t
+  val of_component_class :
+    ('element, 'props, 'state) component_class ->
+    ('element, 'props, 'state) component_class t
+  val of_js_string : js_string Js.t -> 'component_class t
+end = struct
+  type 'component_class t = Unsafe.any
+  let of_component_class = Unsafe.inject
+  let of_js_string = Unsafe.inject
+end
+
+class type ['element, 'props, 'state] react = object
   method createElement :
-    js_string t -> 'props t opt -> Unsafe.any js_array t opt ->
-    'element t meth
+    ('element, 'props, 'state) component_class Or_js_string.t -> 'props t opt ->
+    Unsafe.any js_array t opt -> 'element t meth
 end
 
 class type ['element] react_dom = object
@@ -15,7 +37,11 @@ end
 module type S = sig
   type element
   type props
-  val react : (element, props) react t
+  type state
+  type nonrec component = (element, props, state) component
+  type nonrec component_class = (element, props, state) component_class
+
+  val react : (element, props, state) react t
   val react_dom : element react_dom t
 end
 
