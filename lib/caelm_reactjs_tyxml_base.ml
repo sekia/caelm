@@ -65,6 +65,10 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
         `Element (Wrapper.create_element (`Tag name) props children)
 
       let leaf ?a:(attributes=[]) name = node ~a:attributes name []
+
+      let react_component constr ?(props=[]) children =
+        let props = Properties.of_list props in
+        `Element (Wrapper.create_element (`Component constr) props children)
     end
 
     module Svg = Svg_f.Make (Xml)

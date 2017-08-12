@@ -5,6 +5,17 @@ struct
   module Html = struct
     open Base.Html
 
+    type +'a elt = 'a Base.Html.elt
+    type +'a attrib = 'a Base.Html.attrib
+
+    module Unsafe = struct
+      include Unsafe
+
+      let react_component constr ?(props=[]) children =
+        let props = to_xmlattribs props in
+        Base.Xml.react_component constr ~props (toeltl children) |> tot
+    end
+
     let a_key = a_key
     let a_dangerouslysetinnerhtml = a_dangerouslysetinnerhtml
 

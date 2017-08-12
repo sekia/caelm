@@ -18,12 +18,17 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
          and type elt := elt
          and type event_handler := event_handler
          and type uri = Uri.t
+
+      val react_component :
+        Reactjs.component_class -> ?props:attrib list -> elt list -> elt
     end
 
     module Svg : Svg_sigs.Make(Xml).T
 
     module Html : Html_sigs.Make(Xml)(Svg).T
   end
+
+  module Xml : module type of Base.Xml
 
   module Html : sig
     include module type of Base.Html
