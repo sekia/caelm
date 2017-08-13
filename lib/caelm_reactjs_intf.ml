@@ -51,5 +51,5 @@ module type Scope = sig
 end
 
 module type Require = sig
-  val require : js_string t -> < .. > t
+  val require : js_string t -> 'a
 end
