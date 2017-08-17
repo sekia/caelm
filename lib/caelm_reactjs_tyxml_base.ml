@@ -116,6 +116,8 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
     let a_scoped = Base.Xml.bool_attrib "scoped"
     let a_seamless = Base.Xml.bool_attrib "seamless"
     let a_selected = Base.Xml.bool_attrib "selected"
+    let a_style value =
+      ("style", `Object (Base.Properties.Value.Unsafe.cast_any_object value))
 
     (* Override multi-word attribute names with camel-cased ones. *)
     let a_accept_charset = rename_attrib a_accept_charset "acceptCharset"

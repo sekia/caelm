@@ -114,7 +114,7 @@ struct
     let a_srcset = a_srcset
     let a_start = a_start
     let a_step = a_step
-    (* let a_style = a_style *)
+    let a_style = a_style
     let a_tabindex = a_tabindex
     let a_target = a_target
     let a_title = a_title

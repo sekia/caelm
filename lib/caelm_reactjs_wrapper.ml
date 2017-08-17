@@ -2,6 +2,7 @@ include Caelm_reactjs_wrapper_intf
 
 module Properties = struct
   module Value = struct
+    type any_object = < > Js.t
     type event_handler = element event Js.t -> unit
     type inner_html
 
@@ -11,10 +12,13 @@ module Properties = struct
       | `Float of float
       | `Int of int
       | `InnerHtml of inner_html
+      | `Object of any_object
       | `String of string
       ]
 
     module Unsafe = struct
+      let cast_any_object object_ = Js.Unsafe.coerce object_
+
       let cast_event_handler f event = f (Js.Unsafe.coerce event)
 
       let inner_html fragment =
@@ -30,6 +34,7 @@ module Properties = struct
       | `Float f -> inject f
       | `Int i -> inject i
       | `InnerHtml h -> inject h
+      | `Object o -> inject o
       | `String s -> inject (Js.string s)
   end
 

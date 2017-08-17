@@ -59,6 +59,9 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
     val a_seamless : bool -> [> `Seamless ] attrib
     val a_selected : bool -> [> `Selected ] attrib
 
+    (* ReactJS's |style| attribute takes an object *)
+    val a_style : < .. > Js.t -> [> `Style_Attr ] attrib
+
     (* ReactJS's synthetic event handlers *)
 
     (* Animation events *)
