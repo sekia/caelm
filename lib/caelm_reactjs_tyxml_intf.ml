@@ -11,6 +11,12 @@ struct
     module Unsafe = struct
       include Unsafe
 
+      let bool_attrib name value = Base.Xml.bool_attrib name value |> to_attrib
+
+      let event_handler_attrib = Base.Html.event_handler_attrib
+
+      let object_attrib = Base.Html.object_attrib
+
       let react_component constr ?(props=[]) children =
         let props = to_xmlattribs props in
         Base.Xml.react_component constr ~props (toeltl children) |> tot

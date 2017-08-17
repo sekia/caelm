@@ -19,6 +19,8 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
          and type event_handler := event_handler
          and type uri = Uri.t
 
+      val bool_attrib : string -> bool -> attrib
+
       val react_component :
         Reactjs.component_class -> ?props:attrib list -> elt list -> elt
     end
@@ -32,6 +34,10 @@ module Make (Reactjs : Caelm_reactjs.S) : sig
 
   module Html : sig
     include module type of Base.Html
+
+    val event_handler_attrib : string -> (< .. > Js.t -> unit) -> 'a attrib
+
+    val object_attrib : string -> < .. > Js.t -> 'a attrib
 
     val a_key : string -> [> `Key ] attrib
     val a_dangerouslysetinnerhtml :

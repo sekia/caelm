@@ -27,7 +27,6 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
 
       let attrib_creator value_ctor = fun name value -> name, value_ctor value
 
-      let bool_attrib = attrib_creator (fun v -> `Bool v)
       let float_attrib = attrib_creator (fun v -> `Float v)
       let int_attrib = attrib_creator (fun v -> `Int v)
       let string_attrib = attrib_creator (fun v -> `String v)
@@ -41,6 +40,9 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
       let event_handler_attrib = attrib_creator (fun v -> `EventHandler v)
       let keyboard_event_handler_attrib = event_handler_attrib
       let mouse_event_handler_attrib = event_handler_attrib
+
+      let bool_attrib = attrib_creator (fun v -> `Bool v)
+      let object_attrib = attrib_creator (fun v -> `Object v)
 
       type elt = Wrapper.node
 
@@ -82,10 +84,13 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
 
     let rename_attrib f name = fun arg -> name, snd (f arg)
 
-    let event_handler_attrib name =
-      fun h ->
-        let value = Base.Properties.Value.Unsafe.cast_event_handler h in
-        Base.Xml.event_handler_attrib name value
+    let event_handler_attrib name handler =
+      let value = Base.Properties.Value.Unsafe.cast_event_handler handler in
+      Base.Xml.event_handler_attrib name value |> to_attrib
+
+    let object_attrib name value =
+      let value = Base.Properties.Value.Unsafe.cast_any_object value in
+      Base.Xml.object_attrib name value |> to_attrib
 
     let a_key key = ("key", `String key)
     let a_dangerouslysetinnerhtml fragment =
