@@ -1,0 +1,34 @@
+(library (name caelm)
+ (libraries js_of_ocaml react)
+ (modes byte)
+ (modules
+  caelm
+  caelm_intf
+  caelm_reactjs
+  caelm_reactjs_intf
+  caelm_reactjs_wrapper
+  caelm_reactjs_wrapper_intf)
+ (preprocess (pps js_of_ocaml.ppx))
+ (public_name caelm)
+ (synopsis "The Elm Architecture riding on camelback")
+ (wrapped false))
+
+(library (name caelm_lwt)
+ (libraries caelm js_of_ocaml lwt lwt_react)
+ (modes byte)
+ (modules caelm_lwt)
+ (public_name caelm.lwt)
+ (synopsis "Caelm shorthand functor using Lwt")
+ (wrapped false))
+
+(library (name caelm_tyxml)
+ (libraries caelm js_of_ocaml tyxml uri)
+ (modes byte)
+ (modules
+  caelm_reactjs_tyxml
+  caelm_reactjs_tyxml_base
+  caelm_reactjs_tyxml_base_intf
+  caelm_reactjs_tyxml_intf)
+ (public_name caelm.tyxml)
+ (synopsis "TyXML-based virtual DOM library")
+ (wrapped false))
