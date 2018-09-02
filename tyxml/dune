@@ -1,0 +1,6 @@
+(library (name caelm_tyxml)
+ (libraries caelm js_of_ocaml tyxml uri)
+ (modes byte)
+ (public_name caelm.tyxml)
+ (synopsis "TyXML-based virtual DOM library")
+ (wrapped false))
