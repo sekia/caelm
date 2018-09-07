@@ -35,7 +35,7 @@ module S = struct
   end
 
   module type Wrapper = sig
-    module Reactjs : Caelm_reactjs.S
+    module Reactjs : Reactjs.S
     module Properties : Properties
 
     type element_type =

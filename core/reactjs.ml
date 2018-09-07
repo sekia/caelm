@@ -1,4 +1,4 @@
-include Caelm_reactjs_intf
+include Reactjs_intf
 
 let wrap_react react = object%js
   method createElement type_ props children =

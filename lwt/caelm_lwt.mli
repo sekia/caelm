@@ -1,4 +1,4 @@
-open Caelm_intf
+open Caelm
 
 module Make
     (State : S.State with module Thread := Lwt)

@@ -1,4 +1,4 @@
-include module type of Caelm_reactjs_intf
+include module type of Reactjs_intf
 
 module Make (Scope : Scope) : S
 

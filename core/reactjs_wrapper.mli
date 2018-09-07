@@ -1,9 +1,9 @@
-include module type of Caelm_reactjs_wrapper_intf
+include module type of Reactjs_wrapper_intf
 
 module Properties : S.Properties
 
 module Unsafe : S.Unsafe
 
-module Make (Reactjs : Caelm_reactjs.S) : S.Wrapper
+module Make (Reactjs : Reactjs.S) : S.Wrapper
   with module Reactjs := Reactjs
    and module Properties := Properties

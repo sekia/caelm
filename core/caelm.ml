@@ -1,5 +1,3 @@
-include Caelm_intf
-
 module Make
     (Thread : S.Thread) (React : S.React)
     (State : S.State with module Thread := Thread)
@@ -52,3 +50,9 @@ module Make
 
   let terminate { terminate; _ } = terminate ()
 end
+
+module Reactjs = Reactjs
+
+module Reactjs_wrapper = Reactjs_wrapper
+
+module S = S

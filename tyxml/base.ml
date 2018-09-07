@@ -1,7 +1,7 @@
-module Make (Reactjs : Caelm_reactjs.S) = struct
+module Make (Reactjs : Caelm.Reactjs.S) = struct
   module Base = struct
-    module Wrapper = Caelm_reactjs_wrapper.Make (Reactjs)
-    module Properties = Caelm_reactjs_wrapper.Properties
+    module Wrapper = Caelm.Reactjs_wrapper.Make (Reactjs)
+    module Properties = Caelm.Reactjs_wrapper.Properties
 
     module Xml = struct
       module W = Xml_wrap.NoWrap

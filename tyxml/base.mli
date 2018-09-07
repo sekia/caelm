@@ -1,15 +1,15 @@
 open Html_types
-open Caelm_reactjs_tyxml_base_intf
-open Caelm_reactjs_wrapper
+open Base_intf
+open Caelm.Reactjs_wrapper
 
-module Make (Reactjs : Caelm_reactjs.S) : sig
+module Make (Reactjs : Caelm.Reactjs.S) : sig
   module Base : sig
-    module Properties : Caelm_reactjs_wrapper.S.Properties
+    module Properties : Caelm.Reactjs_wrapper.S.Properties
 
     module Xml : sig
       type attrib = string * Properties.Value.t
 
-      type elt = Caelm_reactjs_wrapper.Make(Reactjs).node
+      type elt = Caelm.Reactjs_wrapper.Make(Reactjs).node
 
       type event_handler = Properties.Value.event_handler
 

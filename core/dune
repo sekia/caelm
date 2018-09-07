@@ -3,5 +3,4 @@
  (modes byte)
  (preprocess (pps js_of_ocaml.ppx))
  (public_name caelm)
- (synopsis "The Elm Architecture riding on camelback")
- (wrapped false))
+ (synopsis "The Elm Architecture riding on camelback"))

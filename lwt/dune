@@ -2,5 +2,4 @@
  (libraries caelm js_of_ocaml lwt lwt_react)
  (modes byte)
  (public_name caelm.lwt)
- (synopsis "Caelm shorthand functor using Lwt")
- (wrapped false))
+ (synopsis "Caelm shorthand functor using Lwt"))

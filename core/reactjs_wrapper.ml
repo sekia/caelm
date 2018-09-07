@@ -1,4 +1,4 @@
-include Caelm_reactjs_wrapper_intf
+include Reactjs_wrapper_intf
 
 module Properties = struct
   module Value = struct
@@ -66,7 +66,7 @@ module Unsafe = struct
     Optdef.get opt (fun () -> invalid_arg "Unsafe.get_optdef_exn: undefined")
 end
 
-module Make (Reactjs : Caelm_reactjs.S) = struct
+module Make (Reactjs : Reactjs.S) = struct
   type element_type = [ `Component of Reactjs.component_class | `Tag of string ]
 
   type node = [ `String of string | `Element of Reactjs.element Js.t ]
@@ -80,7 +80,7 @@ module Make (Reactjs : Caelm_reactjs.S) = struct
   let create_element type_ props children =
     let open Js in
     let type_ =
-      let open Caelm_reactjs.Or_js_string in
+      let open Reactjs_intf.Or_js_string in
       match type_ with
       | `Component c -> of_component_class c
       | `Tag s -> of_js_string (Js.string s) in
