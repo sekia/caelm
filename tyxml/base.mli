@@ -618,6 +618,8 @@ module Make (Reactjs : Caelm.Reactjs.S) : sig
 
     val pcdata : string -> [> `PCDATA ] elt
 
+    val txt : string -> [> `PCDATA ] elt
+
     val to_react_element : 'a elt -> Reactjs.element Js.t
   end
 end
