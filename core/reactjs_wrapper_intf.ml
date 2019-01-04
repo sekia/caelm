@@ -1,3 +1,6 @@
+module Dom_html = Js_of_ocaml.Dom_html
+module Js = Js_of_ocaml.Js
+
 module S = struct
   module type Properties = sig
     module Value : sig

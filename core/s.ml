@@ -1,3 +1,6 @@
+module Dom_html = Js_of_ocaml.Dom_html
+module Js = Js_of_ocaml.Js
+
 module type Thread = sig
   type 'a t
   val return : 'a -> 'a t
