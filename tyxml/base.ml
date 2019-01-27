@@ -19,6 +19,7 @@ module Make (Reactjs : Caelm.Reactjs.S) = struct
       type event_handler = Properties.Value.event_handler
       type mouse_event_handler = event_handler
       type keyboard_event_handler = event_handler
+      type touch_event_handler = event_handler
 
       let string_of_uri = Uri.to_string
       let uri_of_string = Uri.of_string
@@ -38,6 +39,7 @@ module Make (Reactjs : Caelm.Reactjs.S) = struct
       let event_handler_attrib = attrib_creator (fun v -> `EventHandler v)
       let keyboard_event_handler_attrib = event_handler_attrib
       let mouse_event_handler_attrib = event_handler_attrib
+      let touch_event_handler_attrib = event_handler_attrib
 
       let bool_attrib = attrib_creator (fun v -> `Bool v)
       let object_attrib = attrib_creator (fun v -> `Object v)
