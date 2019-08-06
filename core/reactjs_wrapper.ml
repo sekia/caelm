@@ -1,5 +1,7 @@
 include Reactjs_wrapper_intf
 
+open Js_of_ocaml
+
 module Properties = struct
   module Value = struct
     type any_object = < > Js.t

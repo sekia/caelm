@@ -1,7 +1,5 @@
+open Js_of_ocaml
 open Js_of_ocaml.Js
-
-module Dom_html = Js_of_ocaml.Dom_html
-module Js = Js_of_ocaml.Js
 
 class type ['element, 'props, 'state] component = object
   method props : 'props t readonly_prop

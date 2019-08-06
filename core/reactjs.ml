@@ -1,5 +1,7 @@
 include Reactjs_intf
 
+open Js_of_ocaml
+
 let wrap_react react = object%js
   method createElement type_ props children =
     let open Js in

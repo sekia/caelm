@@ -1,3 +1,4 @@
+open Js_of_ocaml
 open Html_types
 open Base_intf
 open Caelm.Reactjs_wrapper
